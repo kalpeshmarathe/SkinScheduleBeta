@@ -6,6 +6,7 @@ import Products from './pages/Products.jsx'
 import About from './pages/About.jsx'
 import Contact from './pages/Contact.jsx'
 import './styles.css'
+import { CartProvider } from './CartContext.jsx'
 
 const router = createBrowserRouter([
 	{ path: '/', element: <App /> },
@@ -15,9 +16,11 @@ const router = createBrowserRouter([
 ])
 
 createRoot(document.getElementById('root')).render(
-	<React.StrictMode>
-		<RouterProvider router={router} />
-	</React.StrictMode>
+    <React.StrictMode>
+        <CartProvider>
+            <RouterProvider router={router} />
+        </CartProvider>
+    </React.StrictMode>
 )
 
 

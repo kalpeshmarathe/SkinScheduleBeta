@@ -1,4 +1,6 @@
 import React from 'react'
+import logoUrl from '../logo.png'
+import { useCart } from './CartContext.jsx'
 
 const IconCheck = () => (
 	<svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden>
@@ -23,7 +25,7 @@ const IconCart = () => (
 
 export default function App() {
     const [mobileOpen, setMobileOpen] = React.useState(false)
-    const [cartCount] = React.useState(2)
+    const { count, items, toggle, isOpen, removeItem, clear, total, addItem } = useCart()
     const [activeHash, setActiveHash] = React.useState(typeof window !== 'undefined' ? window.location.hash || '#' : '#')
     const [query, setQuery] = React.useState('')
 
@@ -62,7 +64,7 @@ export default function App() {
             <header className="navbar">
 				<div className="container navbar-inner">
                     <a href="#" className="brand" aria-label="SkinSchedule home" onClick={(e)=>{e.preventDefault();window.scrollTo({top:0,behavior:'smooth'})}}>
-                        <img className="brand-img" src="/logo.png" alt="SkinSchedule logo" />
+                        <img className="brand-img" src={logoUrl} alt="SkinSchedule logo" />
                     </a>
                     <nav className="nav-links">
                         <a className={activeHash === '#' ? 'active' : ''} href="#" onClick={(e)=>{e.preventDefault();handleNavClick('root')}}>Home</a>
@@ -76,11 +78,11 @@ export default function App() {
                             <span className="search-icon"><IconSearch/></span>
                             <input value={query} onChange={(e)=>setQuery(e.target.value)} aria-label="Search products" placeholder="Search"/>
                         </form>
-                        <button className="cart-btn" aria-label="Open cart">
+                        <button className="cart-btn" aria-label="Open cart" onClick={toggle}>
                             <IconCart/>
-                            <span className="cart-badge">{cartCount}</span>
+                            <span className="cart-badge">{count}</span>
                         </button>
-                        <button className="nav-cta" onClick={()=>handleNavClick('products')}>Shop Now</button>
+                        {/* removed Shop Now from navbar as requested */}
                         <button className="nav-toggle" aria-label="Toggle menu" onClick={()=>setMobileOpen(v=>!v)}>
                             <span/>
                             <span/>
@@ -102,6 +104,39 @@ export default function App() {
                     </div>
                 )}
 			</header>
+
+            {isOpen && (
+                <div className="cart-popup" role="dialog" aria-modal="true" aria-label="Cart">
+                    <div className="cart-popup-inner">
+                        <div className="cart-popup-head">
+                            <strong>Cart</strong>
+                            <button className="cart-close" onClick={()=>toggle()} aria-label="Close cart">×</button>
+                        </div>
+                        {items.length === 0 ? (
+                            <div className="cart-empty">Your cart is empty.</div>
+                        ) : (
+                            <ul className="cart-list">
+                                {items.map(it => (
+                                    <li key={it.id} className="cart-row">
+                                        <div className="cart-info">
+                                            <div className="cart-name">{it.name}</div>
+                                            <div className="cart-meta">Qty {it.qty} • ${ (it.price || 0).toFixed(2) }</div>
+                                        </div>
+                                        <button className="cart-remove" onClick={()=>removeItem(it.id)}>Remove</button>
+                                    </li>
+                                ))}
+                            </ul>
+                        )}
+                        <div className="cart-footer">
+                            <div className="cart-total"><span>Total</span><strong>${ total.toFixed(2) }</strong></div>
+                            <div className="cart-actions">
+                                <button className="subscribe-btn" onClick={clear}>Clear</button>
+                                <button className="nav-cta" onClick={()=>alert('Checkout coming soon')}>Checkout</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            )}
 
 			<section className="hero">
 				<div className="container hero-grid">
@@ -137,7 +172,7 @@ export default function App() {
 								<li><span style={{color:'#10b981'}}><IconCheck/></span> Supports liver detoxification</li>
 								<li><span style={{color:'#10b981'}}><IconCheck/></span> Vegan & cruelty‑free</li>
 							</ul>
-							<button className="add-to-cart">Add to Cart</button>
+                            <button className="add-to-cart" onClick={()=>addItem({ id: 'glow-pill', name: 'Glow-Up Glutathione Tablets', price: 59.99 })}>Add to Cart</button>
 						</div>
 					</div>
 				</div>

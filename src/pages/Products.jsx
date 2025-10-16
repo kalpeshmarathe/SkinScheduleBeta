@@ -29,6 +29,7 @@ const PinkCard = ({ id, title, price }) => {
 
 export default function Products() {
     const { count, toggle } = useCart()
+    const [mobileOpen, setMobileOpen] = React.useState(false)
 	return (
 		<>
 			<header className="navbar">
@@ -48,8 +49,22 @@ export default function Products() {
                             <IconCart/>
                             <span className="cart-badge">{count}</span>
                         </button>
+                        <button className="nav-toggle" aria-label="Toggle menu" onClick={()=>setMobileOpen(v=>!v)}>
+                            <span/>
+                            <span/>
+                            <span/>
+                        </button>
                     </div>
 				</div>
+                {mobileOpen && (
+                    <div className="mobile-menu">
+                        <Link to="/" onClick={()=>setMobileOpen(false)}>Home</Link>
+                        <Link to="/products" onClick={()=>setMobileOpen(false)}>Products</Link>
+                        <a href="/#about" onClick={()=>setMobileOpen(false)}>About</a>
+                        <a href="/#reviews" onClick={()=>setMobileOpen(false)}>Reviews</a>
+                        <a href="/#contact" onClick={()=>setMobileOpen(false)}>Contact</a>
+                    </div>
+                )}
 			</header>
 
 			<section className="hero">

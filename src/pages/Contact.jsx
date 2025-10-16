@@ -14,6 +14,7 @@ const IconCart = () => (
 export default function Contact() {
 	const onSubmit = (e) => { e.preventDefault(); alert('Thanks! We will reach out soon.')} 
     const { count, toggle } = useCart()
+    const [mobileOpen, setMobileOpen] = React.useState(false)
 	return (
 		<>
 			<header className="navbar">
@@ -32,8 +33,21 @@ export default function Contact() {
                             <IconCart/>
                             <span className="cart-badge">{count}</span>
                         </button>
+                        <button className="nav-toggle" aria-label="Toggle menu" onClick={()=>setMobileOpen(v=>!v)}>
+                            <span/>
+                            <span/>
+                            <span/>
+                        </button>
                     </div>
 				</div>
+                {mobileOpen && (
+                    <div className="mobile-menu">
+                        <Link to="/" onClick={()=>setMobileOpen(false)}>Home</Link>
+                        <Link to="/products" onClick={()=>setMobileOpen(false)}>Products</Link>
+                        <Link to="/about" onClick={()=>setMobileOpen(false)}>About</Link>
+                        <Link to="/contact" onClick={()=>setMobileOpen(false)}>Contact</Link>
+                    </div>
+                )}
 			</header>
 
 			<section className="newsletter site-gradient">
@@ -67,5 +81,6 @@ export default function Contact() {
 		</>
 	)
 }
+
 
 

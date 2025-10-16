@@ -60,10 +60,14 @@ body {
 .search { position: relative; display: none; }
 .search input { width: 240px; padding: 10px 12px 10px 34px; border-radius: 999px; border: 1px solid rgba(2,6,23,0.08); background: #fff; outline: none; }
 .search-icon { position: absolute; left: 10px; top: 50%; transform: translateY(-50%); color: #9ca3af; }
-.cart-btn { position: relative; display: grid; place-items: center; width: 40px; height: 40px; border-radius: 999px; border: 1px solid rgba(2,6,23,0.08); background: #fff; box-shadow: var(--shadow); color: #db2777; }
-.cart-badge { position: absolute; top: -6px; right: -6px; background: var(--primary); color: #fff; font-size: 11px; line-height: 1; padding: 4px 6px; border-radius: 999px; box-shadow: 0 2px 8px var(--ring); }
-.nav-toggle { display: inline-flex; width: 40px; height: 40px; border-radius: 10px; border: 1px solid rgba(2,6,23,0.08); background: #fff; align-items: center; justify-content: center; gap: 3px; }
-.nav-toggle span { display: block; width: 16px; height: 2px; background: #6b7280; }
+.cart-btn { position: relative; display: grid; place-items: center; width: 42px; height: 42px; border-radius: 12px; border: 1px solid rgba(2,6,23,0.10); background: #fff; box-shadow: var(--shadow); color: #db2777; transition: transform .15s ease, box-shadow .2s ease, border-color .2s ease, background .2s ease; }
+.cart-btn:hover { transform: translateY(-1px); box-shadow: 0 12px 24px rgba(219,39,119,.18); border-color: rgba(236,72,153,0.28); }
+.cart-btn:focus-visible { outline: 3px solid rgba(236,72,153,.35); outline-offset: 2px; }
+.cart-badge { position: absolute; top: -6px; right: -6px; background: linear-gradient(135deg, var(--secondary), var(--primary)); color: #fff; font-weight: 700; font-size: 11px; line-height: 1; padding: 4px 6px; border-radius: 999px; box-shadow: 0 4px 12px var(--ring); }
+.nav-toggle { display: inline-flex; width: 42px; height: 42px; border-radius: 12px; border: 1px solid rgba(2,6,23,0.10); background: #fff; align-items: center; justify-content: center; gap: 4px; transition: transform .15s ease, box-shadow .2s ease, border-color .2s ease, background .2s ease; }
+.nav-toggle:hover { transform: translateY(-1px); box-shadow: 0 12px 24px rgba(2,6,23,.12); border-color: rgba(2,6,23,0.16); }
+.nav-toggle:focus-visible { outline: 3px solid rgba(236,72,153,.35); outline-offset: 2px; }
+.nav-toggle span { display: block; width: 18px; height: 2px; background: #6b7280; border-radius: 2px; }
 .mobile-menu { display: grid; gap: 10px; padding: 12px 20px 16px; border-top: 1px solid rgba(2,6,23,0.06); background: #fff; }
 .mobile-menu a { text-decoration: none; color: #374151; padding: 10px 8px; border-radius: 8px; background: rgba(236,72,153,0.06); }
 .nav-cta {

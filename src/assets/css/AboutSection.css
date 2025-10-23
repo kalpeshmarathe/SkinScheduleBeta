@@ -1,0 +1,103 @@
+/* --- 1. Section Styling --- */
+/* This section has a white background to contrast the product section */
+#sk-about-section {
+    padding: 4rem 0;
+    font-family: var(--font-body, 'Plus Jakarta Sans', sans-serif);
+    background-color: var(--card, #ffffff);
+}
+
+.sk-about-container {
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 1.5rem;
+}
+
+/* --- 2. Section Header --- */
+.sk-about-title, .sk-about-sub {
+    text-align: center;
+}
+
+.sk-about-title {
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: var(--color-headline, #4E423F);
+    margin: 0 0 0.75rem 0;
+}
+
+.sk-about-sub {
+    font-size: 1.1rem;
+    color: var(--muted, #6b7280);
+    margin: 0 auto 3.5rem auto; /* More space before the grid */
+    max-width: 550px;
+    line-height: 1.6;
+}
+
+/* --- 3. Feature Grid --- */
+.sk-about-grid {
+    display: grid;
+    /* 3-column layout */
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2rem;
+}
+
+/* --- 4. Feature Card (The "Best Design") --- */
+.sk-about-feature-card {
+    /* Uses your brand's soft background color */
+    background-color: var(--bg, #fff8f6);
+    border: 1px solid var(--accent, #f9c9c2);
+    border-radius: 24px;
+    padding: 2.5rem 2rem;
+    text-align: center;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.sk-about-feature-card:hover {
+    transform: translateY(-10px);
+    box-shadow: var(--shadow, 0 10px 30px rgba(0, 0, 0, 0.07));
+}
+
+/* --- 5. Card Internals (Icon, Text) --- */
+.sk-about-icon {
+    font-size: 2.5rem; /* Icon size */
+    color: var(--primary, #FF6A5B); /* Uses your brand's main color */
+    margin-bottom: 1.5rem;
+    line-height: 1;
+}
+
+.sk-about-feature-card h4 {
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: var(--color-headline, #4E423F);
+    margin: 0 0 0.5rem 0;
+}
+
+.sk-about-feature-card p {
+    font-size: 0.95rem;
+    color: var(--muted, #6b7280);
+    line-height: 1.7;
+    margin: 0;
+}
+
+/* --- 6. Responsive --- */
+@media (max-width: 900px) {
+    /* On tablet, go to 2 columns */
+    .sk-about-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 768px) {
+    /* On mobile, stack to 1 column */
+    .sk-about-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .sk-about-title {
+        font-size: 2rem;
+    }
+
+    #sk-about-section {
+        padding: 2.5rem 0;
+    }
+}

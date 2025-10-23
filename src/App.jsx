@@ -1,33 +1,12 @@
 import React from 'react'
-import logoUrl from '../logo.png'
-import { useCart } from './CartContext.jsx'
-
-const IconCheck = () => (
-	<svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden>
-		<path d="M20 6L9 17l-5-5" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-	</svg>
-)
-
-const IconSearch = () => (
-	<svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden>
-		<circle cx="11" cy="11" r="7" stroke="currentColor" strokeWidth="2"/>
-		<path d="M21 21l-4.3-4.3" stroke="currentColor" strokeWidth="2" strokeLinecap="round"/>
-	</svg>
-)
-
-const IconCart = () => (
-	<svg width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden>
-		<path d="M6 6h15l-1.5 8.5a2 2 0 0 1-2 1.6H9.2a2 2 0 0 1-2-1.6L6 6Zm0 0L5 3H3" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-		<circle cx="10" cy="20" r="1.5" fill="currentColor"/>
-		<circle cx="18" cy="20" r="1.5" fill="currentColor"/>
-	</svg>
-)
+import CartSidebar from './components/CartSidebar.jsx';
+import Navbar from './components/Navbar.jsx'
+import Hero from './components/Hero.jsx'
+import ProductSection from './components/ProductSection.jsx'
+import AboutSection from './components/AboutSection.jsx'
 
 export default function App() {
-    const [mobileOpen, setMobileOpen] = React.useState(false)
-    const { count, items, toggle, isOpen, removeItem, clear, total, addItem } = useCart()
-    const [activeHash, setActiveHash] = React.useState(typeof window !== 'undefined' ? window.location.hash || '#' : '#')
-    const [query, setQuery] = React.useState('')
+  
 
     React.useEffect(() => {
         const onHash = () => setActiveHash(window.location.hash || '#')
@@ -46,138 +25,15 @@ export default function App() {
         }
     }, [])
 
-    const handleNavClick = (id) => {
-        setMobileOpen(false)
-        const el = document.getElementById(id)
-        if (el) el.scrollIntoView({ behavior: 'smooth' })
-        window.location.hash = `#${id}`
-    }
-
-    const submitSearch = (e) => {
-        e.preventDefault()
-        if (!query.trim()) return
-        alert(`Searching for: ${query}`)
-    }
+    
 
     return (
 		<>
-            <header className="navbar">
-				<div className="container navbar-inner">
-                    <a href="#" className="brand" aria-label="SkinSchedule home" onClick={(e)=>{e.preventDefault();window.scrollTo({top:0,behavior:'smooth'})}}>
-                        <img className="brand-img" src={logoUrl} alt="SkinSchedule logo" />
-                    </a>
-                    <nav className="nav-links">
-                        <a className={activeHash === '#' ? 'active' : ''} href="#" onClick={(e)=>{e.preventDefault();handleNavClick('root')}}>Home</a>
-                        <a href="/products">Products</a>
-                        <a href="/about">About</a>
-                        <a className={activeHash === '#reviews' ? 'active' : ''} href="#reviews" onClick={(e)=>{e.preventDefault();handleNavClick('reviews')}}>Reviews</a>
-                        <a href="/contact">Contact</a>
-                    </nav>
-                    <div className="nav-actions">
-                        <form className="search show-md" onSubmit={submitSearch}>
-                            <span className="search-icon"><IconSearch/></span>
-                            <input value={query} onChange={(e)=>setQuery(e.target.value)} aria-label="Search products" placeholder="Search"/>
-                        </form>
-                        <button className="cart-btn" aria-label="Open cart" onClick={toggle}>
-                            <IconCart/>
-                            <span className="cart-badge">{count}</span>
-                        </button>
-                        {/* removed Shop Now from navbar as requested */}
-                        <button className="nav-toggle" aria-label="Toggle menu" onClick={()=>setMobileOpen(v=>!v)}>
-                            <span/>
-                            <span/>
-                            <span/>
-                        </button>
-                    </div>
-				</div>
-                {mobileOpen && (
-                    <div className="mobile-menu">
-                        <form className="search" onSubmit={submitSearch}>
-                            <span className="search-icon"><IconSearch/></span>
-                            <input value={query} onChange={(e)=>setQuery(e.target.value)} aria-label="Search" placeholder="Search"/>
-                        </form>
-                        <a href="#" onClick={(e)=>{e.preventDefault();handleNavClick('root')}}>Home</a>
-                        <a href="/products">Products</a>
-                        <a href="/about">About</a>
-                        <a href="#reviews" onClick={(e)=>{e.preventDefault();handleNavClick('reviews')}}>Reviews</a>
-                        <a href="/contact">Contact</a>
-                    </div>
-                )}
-			</header>
-
-            {isOpen && (
-                <div className="cart-popup" role="dialog" aria-modal="true" aria-label="Cart">
-                    <div className="cart-popup-inner">
-                        <div className="cart-popup-head">
-                            <strong>Cart</strong>
-                            <button className="cart-close" onClick={()=>toggle()} aria-label="Close cart">×</button>
-                        </div>
-                        {items.length === 0 ? (
-                            <div className="cart-empty">Your cart is empty.</div>
-                        ) : (
-                            <ul className="cart-list">
-                                {items.map(it => (
-                                    <li key={it.id} className="cart-row">
-                                        <div className="cart-info">
-                                            <div className="cart-name">{it.name}</div>
-                                            <div className="cart-meta">Qty {it.qty} • ${ (it.price || 0).toFixed(2) }</div>
-                                        </div>
-                                        <button className="cart-remove" onClick={()=>removeItem(it.id)}>Remove</button>
-                                    </li>
-                                ))}
-                            </ul>
-                        )}
-                        <div className="cart-footer">
-                            <div className="cart-total"><span>Total</span><strong>${ total.toFixed(2) }</strong></div>
-                            <div className="cart-actions">
-                                <button className="subscribe-btn" onClick={clear}>Clear</button>
-                                <button className="nav-cta" onClick={()=>alert('Checkout coming soon')}>Checkout</button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            )}
-
-			<section className="hero">
-				<div className="container hero-grid">
-					<div>
-						<div className="eyebrow">Unlock Your Inner Glow</div>
-						<h1>Science-backed glow for your best skin</h1>
-						<p>Discover radiant, healthy skin with premium glutathione tablets and curated skincare. Transform your skin with a routine that fits your schedule.</p>
-						<button className="hero-cta" onClick={() => document.getElementById('products')?.scrollIntoView({ behavior: 'smooth' })}>
-							<span>Shop Now</span>
-						</button>
-					</div>
-					<div>
-						<div className="product-card" aria-hidden></div>
-					</div>
-				</div>
-			</section>
-
-			<section id="products">
-				<div className="container">
-					<h2 className="section-title">Our Star Product</h2>
-					<p className="section-sub">The foundation of your new skin schedule.</p>
-					<div className="product-grid">
-						<div>
-							<div className="product-card" aria-hidden></div>
-						</div>
-						<div>
-							<h3>Glow-Up Glutathione Tablets</h3>
-							<div className="price">$59.99</div>
-							<p className="muted">Each tablet is formulated to brighten your complexion, reduce oxidative stress, and support your skin’s natural glow.</p>
-							<ul className="list">
-								<li><span style={{color:'#10b981'}}><IconCheck/></span> Potent dose with enhanced uptake</li>
-								<li><span style={{color:'#10b981'}}><IconCheck/></span> Powerful antioxidant protection</li>
-								<li><span style={{color:'#10b981'}}><IconCheck/></span> Supports liver detoxification</li>
-								<li><span style={{color:'#10b981'}}><IconCheck/></span> Vegan & cruelty‑free</li>
-							</ul>
-                            <button className="add-to-cart" onClick={()=>addItem({ id: 'glow-pill', name: 'Glow-Up Glutathione Tablets', price: 59.99 })}>Add to Cart</button>
-						</div>
-					</div>
-				</div>
-			</section>
-
+            <Navbar />
+			<Hero />
+			<ProductSection />
+			
+			
 			<section id="reviews">
 				<div className="container">
 					<h2 className="section-title">Real Results, Real Stories</h2>
@@ -207,29 +63,9 @@ export default function App() {
 				</div>
 			</section>
 
-			<section id="about">
-				<div className="container">
-					<h2 className="section-title">Beauty on a Schedule</h2>
-					<p className="section-sub">We blend clinical-grade ingredients with clean standards and delightful routines.</p>
-					<div className="feature-row">
-						<div className="feature">
-							<div className="icon">✨</div>
-							<h4>Visible Radiance</h4>
-							<p className="muted">Target dullness and reveal a naturally luminous complexion.</p>
-						</div>
-						<div className="feature">
-							<div className="icon">🛡️</div>
-							<h4>Antioxidant Shield</h4>
-							<p className="muted">Combat oxidative stress with daily support.</p>
-						</div>
-						<div className="feature">
-							<div className="icon">⏰</div>
-							<h4>Effortless Routine</h4>
-							<p className="muted">A schedule-friendly approach that sticks.</p>
-						</div>
-					</div>
-				</div>
-			</section>
+			<AboutSection/>
+
+			
 
 			<section className="newsletter site-gradient" id="contact">
 				<div className="container">
@@ -290,6 +126,7 @@ export default function App() {
 					</div>
 				</div>
 			</footer>
+			<CartSidebar />
 		</>
 	)
 }

@@ -1,0 +1,193 @@
+/* --- 1. Section Styling (Shared) --- */
+#ps-section, #ps-placeholder-section {
+    padding: 4rem 0;
+    font-family: var(--font-body, 'Plus Jakarta Sans', sans-serif);
+}
+
+#ps-section {
+    background-color: var(--bg, #fff8f6);
+}
+
+#ps-placeholder-section {
+    background-color: var(--card, #ffffff);
+}
+
+.ps-container {
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 1.5rem;
+}
+
+/* --- 2. Section Header (Center Aligned) --- */
+.ps-title, .ps-sub {
+    text-align: center;
+}
+
+.ps-title {
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: var(--color-headline, #4E423F);
+    margin: 0 0 0.75rem 0;
+}
+
+.ps-sub {
+    font-size: 1.1rem;
+    color: var(--muted, #6b7280);
+    margin: 0 auto 3rem auto;
+    max-width: 450px;
+    line-height: 1.6;
+}
+
+/* --- 3. Product Grid (3-Column Desktop) --- */
+.ps-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2rem;
+}
+
+/* --- 4. Professional Product Card Redesign --- */
+.ps-card {
+    background-color: var(--card, #ffffff);
+    border: 1px solid rgba(249, 201, 194, 0.5);
+    border-radius: 24px;
+    box-shadow: var(--shadow, 0 10px 30px rgba(0, 0, 0, 0.07));
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    display: flex;
+    flex-direction: column;
+    opacity: 0;
+    animation: ps-fadeInUp 0.5s ease-out forwards;
+}
+
+.ps-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.12);
+}
+
+/* --- 5. Card Content (Center Aligned) --- */
+.ps-image-container {
+    margin: 1rem;
+    height: 280px;
+    padding: 1rem;
+    box-sizing: border-box;
+    background-color: var(--bg, #fff8f6);
+    border-radius: 16px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.ps-image-container img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+}
+
+.ps-content {
+    padding: 0 1.5rem 1.5rem 1.5rem;
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+    text-align: center; 
+}
+
+.ps-content h3 {
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: var(--color-headline, #4E423F);
+    margin: 0 0 0.5rem 0;
+}
+
+.ps-description {
+    font-size: 0.9rem;
+    color: var(--muted, #6b7280);
+    line-height: 1.6;
+    flex-grow: 1;
+    margin-bottom: 1rem;
+}
+
+.ps-price {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--color-headline, #4E423F);
+    margin-bottom: 1.5rem;
+}
+
+/* --- 6. NEW Button Footer --- */
+.ps-footer {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+}
+
+.ps-btn {
+    width: 100%;
+    border: none;
+    border-radius: 12px;
+    padding: 0.85rem 1.5rem;
+    font-size: 0.9rem;
+    font-weight: 600;
+    font-family: var(--font-body, 'Plus Jakarta Sans', sans-serif);
+    cursor: pointer;
+    transition: all 0.25s ease;
+}
+
+.ps-btn-add {
+    background: var(--gradient-primary, linear-gradient(90deg, #F9884B 0%, #FF6A5B 100%));
+    color: white;
+    box-shadow: 0 4px 15px var(--ring, rgba(255, 106, 91, 0.28));
+}
+
+.ps-btn-add:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px var(--ring, rgba(255, 106, 91, 0.35));
+    filter: brightness(1.05);
+}
+
+.ps-btn-know-more {
+    background-color: var(--card, #ffffff);
+    border: 2px solid var(--primary, #FF6A5B);
+    color: var(--primary, #FF6A5B);
+}
+
+.ps-btn-know-more:hover {
+    background-color: var(--primary, #FF6A5B);
+    color: white;
+}
+
+/* --- 7. Animation --- */
+@keyframes ps-fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* --- 8. Responsive (NEW MOBILE LAYOUT) --- */
+
+@media (max-width: 900px) {
+    /* On tablet, use 2 columns */
+    .ps-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 768px) {
+    /* On phones, stack to 1 column */
+    .ps-grid {
+        grid-template-columns: 1fr;
+        gap: 2rem; /* Add space between stacked cards */
+    }
+    
+    .ps-title {
+        font-size: 2rem;
+    }
+
+    #ps-section, #ps-placeholder-section {
+        padding: 2.5rem 0;
+    }
+}

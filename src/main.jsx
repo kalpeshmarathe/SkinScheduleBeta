@@ -6,7 +6,7 @@ import Products from './pages/Products.jsx'
 import About from './pages/About.jsx'
 import Contact from './pages/Contact.jsx'
 import './styles.css'
-import { CartProvider } from './CartContext.jsx'
+import { CartProvider } from '../src/components/CartContext.jsx'
 
 const router = createBrowserRouter([
 	{ path: '/', element: <App /> },

@@ -1,0 +1,191 @@
+/* --- 1. Font Import & Color Palette --- */
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap');
+
+:root {
+  /* Your Peach/Rose scheme */
+  --bg: #fff8f6;
+  --text: #1f2937;
+  --muted: #6b7280;
+  --card: #ffffff;
+  --primary: #ff6a5b;
+  --secondary: #ff8e7f;
+  --accent: #f9c9c2;
+  --ring: rgba(255, 106, 91, 0.28);
+  
+  /* --- Fonts & Gradients to match screenshot --- */
+  --font-body: 'Plus Jakarta Sans', sans-serif;
+  --color-headline: #4E423F; /* The dark text in the h1 */
+  
+  /* Gradient for text and button */
+  --gradient-primary: linear-gradient(90deg, #F9884B 0%, #FF6A5B 100%); 
+  
+  /* Background gradient for the hero section itself */
+  --gradient-bg-section: radial-gradient(ellipse at 70% 30%, #fff0ec 0%, #fff8f6 100%);
+}
+
+/* --- 2. Body Styling --- */
+body {
+  margin: 0;
+  font-family: var(--font-body);
+  background-color: #ffffff; /* Page background is white, hero has gradient */
+  padding: 1rem; /* Give space around the hero section */
+}
+
+/* --- 3. Hero Section (The Main Card) --- */
+.hero {
+  width: 100%;
+  max-width: 1300px; /* Max width of the hero section */
+  margin: 0 auto; /* Center the hero section */
+  position: relative;
+  padding: 4rem; /* Padding inside the hero section */
+  
+  /* The background gradient, as shown in your image */
+  background-image: var(--gradient-bg-section);
+  
+  border-radius: 40px; /* Large rounded corners */
+  overflow: hidden; /* Keeps content inside */
+}
+
+/* --- 4. Grid Layout Inside the Hero --- */
+.hero-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  align-items: center;
+  /* gap: 3rem; */
+  width: 100%;
+}
+
+/* --- 5. Text Content Styling --- */
+.hero-text-content {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 1rem;
+  z-index: 10;
+}
+
+.eyebrow {
+  font-size: 0.5rem;
+  font-weight: 400;
+  color: var(--muted);
+  text-transform: none;
+  letter-spacing: normal;
+}
+
+.hero-text-content h1 {
+  font-family: var(--font-body);
+  font-size: 2.8rem;
+  font-weight: 600;
+  /* line-height: 1.3; */
+  color: var(--color-headline); /* Dark text for "best skin" */
+  margin: 0;
+}
+
+/* Gradient text effect */
+.text-gradient {
+  background: var(--gradient-primary);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.hero-text-content p {
+  font-size: 1rem;
+  /* line-height: 1.7; */
+  color: var(--muted);
+  max-width: 450px;
+  margin: 0;
+  margin-top: 0.5rem;
+}
+
+/* --- 6. CTA Button Styling --- */
+.hero-cta {
+  background: var(--gradient-primary);
+  color: white;
+  border: none;
+  border-radius: 12px; /* Rounded rectangle button */
+  padding: 0.9rem 1.75rem;
+  font-size: 1rem;
+  font-weight: 600;
+  font-family: var(--font-body);
+  cursor: pointer;
+  transition: all 0.25s ease;
+  margin-top: 1rem;
+  align-self: flex-start;
+  box-shadow: 0 8px 20px var(--ring);
+}
+
+.hero-cta:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 10px 25px var(--ring);
+  filter: brightness(1.05);
+}
+
+/* --- 7. Image Wrapper & Image --- */
+.hero-image-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+}
+
+.hero-image {
+  width: 100%;
+  height: auto;
+  display: block;
+  object-fit: cover; /* Cover the area */
+  border-radius: 24px; /* Rounded corners for the image itself */
+}
+
+/* --- 8. Animations --- */
+.animate-fade-in {
+  opacity: 0;
+  transform: translateY(20px);
+  animation: fadeInSlideUp 0.8s ease-out forwards;
+}
+
+@keyframes fadeInSlideUp {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* --- 9. Responsive (Mobile) --- */
+@media (max-width: 768px) {
+  .hero {
+    padding: 2rem; /* Reduce padding on mobile */
+  }
+
+  .hero-grid {
+    grid-template-columns: 1fr; /* Stack columns */
+    gap: 2rem;
+    text-align: center;
+  }
+  
+  .hero-text-content {
+    align-items: center;
+    order: 1; /* Text comes first */
+  }
+
+  .hero-text-content h1 {
+    font-size: 2.25rem;
+  }
+  
+  .hero-cta {
+    align-self: center;
+  }
+
+  /* --- This is the fix for the mobile image --- */
+  .hero-image-wrapper {
+    order: 2; /* Image comes second */
+    display: block; /* Ensure it's visible */
+    width: 100%;
+    max-width: 400px; /* Stop it from being huge */
+    margin: 0 auto; /* Center it */
+  }
+
+  .hero-image {
+    width: 100%;
+    height: auto;
+  }
+}

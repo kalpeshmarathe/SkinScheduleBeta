@@ -1,0 +1,149 @@
+/* --- 1. Cart Overlay --- */
+.cart-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 1010;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s ease, visibility 0.3s ease;
+}
+.cart-overlay.open {
+    opacity: 1;
+    visibility: visible;
+}
+
+/* --- 2. Cart Sidebar --- */
+.cart-sidebar {
+    position: fixed;
+    top: 0;
+    right: 0;
+    width: 100%;
+    max-width: 400px;
+    height: 100%;
+    background-color: var(--card, #ffffff);
+    z-index: 1020;
+    font-family: var(--font-body, 'Plus Jakarta Sans', sans-serif);
+    display: flex;
+    flex-direction: column;
+    transform: translateX(100%);
+    transition: transform 0.4s cubic-bezier(0.23, 1, 0.32, 1);
+}
+.cart-sidebar.open {
+    transform: translateX(0);
+    box-shadow: -10px 0 30px rgba(0, 0, 0, 0.1);
+}
+
+/* --- 3. Header --- */
+.cart-header {
+    padding: 1.5rem;
+    border-bottom: 1px solid #eee;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.cart-header h3 {
+    margin: 0;
+    font-size: 1.25rem;
+    color: var(--color-headline, #4E423F);
+}
+.cart-close-btn {
+    background: none;
+    border: none;
+    font-size: 2rem;
+    font-weight: 300;
+    color: var(--muted, #6b7280);
+    cursor: pointer;
+    line-height: 1;
+}
+
+/* --- 4. Body (Item List) --- */
+.cart-body {
+    flex-grow: 1;
+    overflow-y: auto;
+    padding: 1rem;
+}
+.cart-empty {
+    text-align: center;
+    padding: 3rem 0;
+    color: var(--muted, #6b7280);
+}
+.cart-item {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding: 1rem 0.5rem;
+    border-bottom: 1px solid #f0f0f0;
+}
+.cart-item-img {
+    width: 60px;
+    height: 60px;
+    object-fit: contain;
+    border-radius: 8px;
+    background-color: var(--bg, #fff8f6);
+}
+.cart-item-details {
+    flex-grow: 1;
+}
+.cart-item-name {
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: var(--color-headline, #4E423F);
+    margin: 0;
+}
+.cart-item-price {
+    font-size: 0.9rem;
+    color: var(--muted, #6b7280);
+    margin: 0.25rem 0 0 0;
+}
+.cart-item-remove {
+    background: none;
+    border: 1px solid #ddd;
+    border-radius: 50%;
+    width: 24px;
+    height: 24px;
+    font-size: 1rem;
+    color: var(--muted, #6b7280);
+    cursor: pointer;
+    line-height: 1;
+    display: grid;
+    place-items: center;
+}
+
+/* --- 5. Footer (Checkout) --- */
+.cart-footer {
+    padding: 1.5rem;
+    border-top: 1px solid #eee;
+    background-color: #fff;
+}
+.cart-total {
+    display: flex;
+    justify-content: space-between;
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: var(--color-headline, #4E423F);
+    margin-bottom: 1.5rem;
+}
+.cart-checkout-btn {
+    /* Uses your brand's gradient button style */
+    width: 100%;
+    border: none;
+    border-radius: 12px;
+    padding: 1rem;
+    font-size: 1rem;
+    font-weight: 600;
+    font-family: var(--font-body, 'Plus Jakarta Sans', sans-serif);
+    cursor: pointer;
+    background: var(--gradient-primary, linear-gradient(90deg, #F9884B 0%, #FF6A5B 100%));
+    color: white;
+    box-shadow: 0 4px 15px var(--ring, rgba(255, 106, 91, 0.28));
+    transition: all 0.25s ease;
+}
+.cart-checkout-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px var(--ring, rgba(255, 106, 91, 0.35));
+    filter: brightness(1.05);
+}

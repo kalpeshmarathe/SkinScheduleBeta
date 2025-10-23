@@ -1,7 +1,7 @@
 // src/components/CartSidebar.jsx
 import React from 'react';
 import { useCart } from './CartContext';
-import '../assets/css/CartSidebar.css'; // We will create this file
+import '@/assets/css/CartSidebar.css'; // We will create this file
 
 export default function CartSidebar() {
     // Get all the cart data and functions

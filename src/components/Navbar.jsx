@@ -1,8 +1,8 @@
 import React from 'react'
-import logoUrl from '../assets/Images/logo.png'
+import logoUrl from '@/assets/Images/logo.png'
 import { useCart } from './CartContext.jsx'
 import 'bootstrap-icons/font/bootstrap-icons.css'
-import '../assets/css/Navbar.css'
+import '@/assets/css/Navbar.css'
 
 // --- THIS IS THE FIX ---
 // You must import the CSS file for the styles to apply

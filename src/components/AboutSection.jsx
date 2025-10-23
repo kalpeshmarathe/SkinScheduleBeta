@@ -1,6 +1,6 @@
 import React from 'react';
 // --- Import the new CSS file ---
-import '../assets/css/AboutSection.css';
+import '@/assets/css/AboutSection.css';
 // Make sure you have bootstrap-icons imported, which you do in your Navbar
 import 'bootstrap-icons/font/bootstrap-icons.css';
 

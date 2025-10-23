@@ -1,7 +1,7 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
-import { useCart } from '../components/CartContext.jsx'
-import Navbar from '../components/Navbar.jsx'
+import { useCart } from '@/components/CartContext.jsx'
+import Navbar from '@/components/Navbar.jsx'
 
 
 const PinkCard = ({ id, title, price }) => {

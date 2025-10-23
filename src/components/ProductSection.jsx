@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 // --- 1. IMPORT YOUR CSS FILES ---
-import '../assets/css/ProductSection.css'; 
-import '../assets/css/ProductModal.css';   
+import '@/assets/css/ProductSection.css'; 
+import '@/assets/css/ProductModal.css';   
 
 // Your images
 import LGlutatheonTablet from '../assets/Images/L-Glutathione.png';

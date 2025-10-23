@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState } from "react";
 import HeroBanner from "../assets/Images/SkinScheduleBanner.png";
-import "../assets/css/Hero.css";
+import "@/assets/css/Hero.css";
 
 function Hero() {
   return (
